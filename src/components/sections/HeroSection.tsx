@@ -1,68 +1,87 @@
 import { Button } from '@/components/ui/button'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Sparkles, Building2, ShieldCheck } from 'lucide-react'
+import heroBg from '@/assets/generatedimage_1774036240218-ec2db.png'
 
 export function HeroSection() {
-  const scrollToContact = () => {
-    document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://img.usecurling.com/p/1920/1080?q=office%20massage%20executive&color=green"
-          alt="Executivo recebendo massagem no escritório"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-secondary/80 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/80 to-transparent" />
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-primary/5">
+      {/* Background with overlay */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${heroBg})`,
+        }}
+      >
+        <div className="absolute inset-0 bg-[#2D9B5C]/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-background" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 py-12 md:py-24">
-        <div className="max-w-3xl animate-fade-in-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-6 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            Especialistas em Bem-estar B2B desde 2013
+      <div className="container relative z-10 px-4 md:px-6 pt-32 pb-20">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
+          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium text-white backdrop-blur-md animate-fade-in-up">
+            <Sparkles className="mr-2 h-4 w-4 text-emerald-300" />
+            <span className="text-emerald-50">Transformando o ambiente corporativo</span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Seus Colaboradores Voltam ao Trabalho com{' '}
-            <span className="text-accent">47% Mais Foco</span>.
+          <h1
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white animate-fade-in-up"
+            style={{ animationDelay: '100ms' }}
+          >
+            Bem-estar que <span className="text-emerald-300">Impulsiona</span> Resultados
           </h1>
 
-          <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">
-            Shiatsu, Reflexologia e Breathwork comprovados. Atenda às exigências da{' '}
-            <strong>NR-1/2025</strong> e aumente o engajamento do seu time com o mesmo padrão
-            escolhido por grandes players como Seagems, Galp e Eneva.
+          <p
+            className="max-w-[42rem] leading-normal text-emerald-50 sm:text-xl sm:leading-8 animate-fade-in-up"
+            style={{ animationDelay: '200ms' }}
+          >
+            Programas corporativos de Shiatsu, Reflexologia e Breathwork para reduzir o estresse,
+            aumentar o foco e promover a saúde integral da sua equipe.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-10">
+          <div
+            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-fade-in-up"
+            style={{ animationDelay: '300ms' }}
+          >
             <Button
               size="lg"
-              onClick={scrollToContact}
-              className="font-bold text-base h-14 px-8 shadow-lg hover:shadow-primary/25 transition-all"
+              className="h-12 px-8 text-base bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-900/20"
             >
-              AGENDE DEMONSTRAÇÃO CORPORATIVA
+              Agendar Avaliação
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="font-bold text-base h-14 bg-white/5 border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
+              className="h-12 px-8 text-base bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-md"
             >
-              FALAR NO WHATSAPP
+              Conhecer Programas
             </Button>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-white/80">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-accent" />
-              <span>Sem custos de implantação</span>
+          <div
+            className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-12 md:pt-16 w-full max-w-3xl mx-auto border-t border-white/10 mt-12 animate-fade-in-up"
+            style={{ animationDelay: '400ms' }}
+          >
+            <div className="flex flex-col items-center gap-2 text-white">
+              <div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md mb-2">
+                <Building2 className="h-6 w-6 text-emerald-300" />
+              </div>
+              <h3 className="font-semibold text-lg">+50 Empresas</h3>
+              <p className="text-sm text-emerald-100/70">Atendidas com Excelência</p>
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-accent" />
-              <span>Adequado à NR-1</span>
+            <div className="flex flex-col items-center gap-2 text-white">
+              <div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md mb-2">
+                <ShieldCheck className="h-6 w-6 text-emerald-300" />
+              </div>
+              <h3 className="font-semibold text-lg">100% Seguro</h3>
+              <p className="text-sm text-emerald-100/70">Terapeutas Certificados</p>
+            </div>
+            <div className="flex flex-col items-center gap-2 text-white col-span-2 md:col-span-1">
+              <div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md mb-2">
+                <Sparkles className="h-6 w-6 text-emerald-300" />
+              </div>
+              <h3 className="font-semibold text-lg">+10k Sessões</h3>
+              <p className="text-sm text-emerald-100/70">Realizadas com sucesso</p>
             </div>
           </div>
         </div>
