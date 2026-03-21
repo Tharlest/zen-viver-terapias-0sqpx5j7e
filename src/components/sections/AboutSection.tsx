@@ -1,70 +1,50 @@
-import { Badge } from '@/components/ui/badge'
-import tharlesImg from '@/assets/foto-tharles-d34df.jpeg'
+import { cn } from '@/lib/utils'
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="py-24 bg-slate-50 dark:bg-slate-900/50">
-      <div className="container px-4 md:px-6 mx-auto">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-          {/* Image Container - Left on Desktop, Top on Mobile */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative group w-full max-w-[400px]">
-              {/* Decorative background blur */}
-              <div className="absolute -inset-4 rounded-3xl bg-primary/10 blur-2xl transition duration-500 group-hover:bg-primary/20"></div>
+    <section className="py-24 bg-white overflow-hidden relative">
+      {/* Anchor targets to ensure menu smooth scroll works regardless of exact link reference */}
+      <div id="quem-somos" className="absolute top-0 -mt-20"></div>
+      <div id="sobre" className="absolute top-0 -mt-20"></div>
+      <div id="about" className="absolute top-0 -mt-20"></div>
 
-              {/* Image wrapper with styling */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border-4 border-background bg-muted shadow-2xl">
-                <img
-                  src={tharlesImg}
-                  alt="Tharles Teixeira - Fundador da Zen Viver Terapias"
-                  className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
-                />
-              </div>
-            </div>
+      <div className="container px-4 md:px-6">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          <div className="w-full lg:w-1/2 relative">
+            <div className="absolute inset-0 bg-[#2D9B5C]/10 rounded-[2rem] transform rotate-3 scale-105 -z-10 transition-transform duration-500 hover:rotate-6"></div>
+            <img
+              src="/foto-tharles-d34df.jpeg"
+              alt="Tharles Teixeira - Fundador da Zen Viver Terapias"
+              className="w-full max-w-lg mx-auto rounded-[2rem] shadow-xl object-cover aspect-[4/5] relative z-10 transition-transform duration-500 hover:-translate-y-2"
+              onError={(e) => {
+                e.currentTarget.src = 'https://img.usecurling.com/ppl/large?gender=male&seed=1'
+              }}
+            />
           </div>
-
-          {/* Text Content - Right on Desktop, Bottom on Mobile */}
-          <div className="flex flex-col justify-center space-y-6">
+          <div className="w-full lg:w-1/2 space-y-8">
             <div className="space-y-4">
-              <Badge
-                variant="outline"
-                className="text-primary border-primary/30 bg-primary/5 px-3 py-1 text-sm"
-              >
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900">
                 Quem Somos
-              </Badge>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Tharles Teixeira
               </h2>
-              <p className="text-xl text-muted-foreground font-medium border-l-2 border-primary pl-4">
-                Fundador & Especialista em Terapias Corporativas
-              </p>
+              <div className="h-1 w-20 bg-[#2D9B5C] rounded-full"></div>
             </div>
 
-            <div className="space-y-4 text-muted-foreground md:text-lg leading-relaxed">
+            <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
               <p>
-                Com vasta experiência em saúde integrativa, Tharles Teixeira fundou a Zen Viver
-                Terapias com o propósito de transformar o ambiente corporativo. Acreditamos que o
-                bem-estar dos colaboradores é o pilar fundamental para empresas produtivas e
-                inovadoras.
+                A <strong>Zen Viver Terapias</strong> nasceu da paixão de{' '}
+                <strong>Tharles Teixeira</strong> por transformar vidas através do bem-estar
+                holístico. Com anos de dedicação, desenvolvemos metodologias focadas na saúde
+                integral corporativa.
               </p>
               <p>
-                Especialista em <strong>Shiatsu</strong>, <strong>Reflexologia</strong> e{' '}
-                <strong>Breathwork</strong>, Tharles desenvolveu uma metodologia voltada para o
-                alívio imediato do estresse e a promoção da saúde mental e física no local de
-                trabalho.
+                Nosso propósito é levar equilíbrio para o ambiente de trabalho, compreendendo que
+                colaboradores saudáveis e centrados são o maior ativo de qualquer empresa.
               </p>
-
-              <div className="pt-6 mt-6 border-t border-border/50">
-                <blockquote className="italic font-medium text-foreground relative">
-                  <span className="text-4xl text-primary/20 absolute -top-4 -left-2 leading-none">
-                    "
-                  </span>
-                  <span className="relative z-10 pl-4 block">
-                    Nossa missão é proporcionar pausas estratégicas que revitalizam o corpo e a
-                    mente, elevando a qualidade de vida e a performance das equipes.
-                  </span>
-                </blockquote>
-              </div>
+              <p>
+                Oferecemos vivências únicas que combinam técnicas milenares e práticas modernas,
+                como o Shiatsu, a Reflexologia e o Breathwork, adaptadas para a realidade dinâmica
+                das organizações de hoje, garantindo equipes mais produtivas, focadas e felizes.
+              </p>
             </div>
           </div>
         </div>
