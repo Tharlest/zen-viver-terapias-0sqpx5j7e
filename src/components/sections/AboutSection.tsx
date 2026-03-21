@@ -13,9 +13,10 @@ export function AboutSection() {
           <div className="w-full lg:w-1/2 relative">
             <div className="absolute inset-0 bg-[#2D9B5C]/10 rounded-[2rem] transform rotate-3 scale-105 -z-10 transition-transform duration-500 hover:rotate-6"></div>
             <img
-              src="/foto-tharles-d34df.jpeg"
+              src="https://img.usecurling.com/p/800/1000?q=professional%20man%20portrait"
               alt="Tharles Teixeira - Fundador da Zen Viver Terapias"
               className="w-full max-w-lg mx-auto rounded-[2rem] shadow-xl object-cover aspect-[4/5] relative z-10 transition-transform duration-500 hover:-translate-y-2"
+              loading="lazy"
               onError={(e) => {
                 e.currentTarget.src = 'https://img.usecurling.com/ppl/large?gender=male&seed=1'
               }}
