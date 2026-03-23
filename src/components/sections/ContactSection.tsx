@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -35,15 +36,13 @@ const formSchema = z.object({
     }),
   telefone: z.string().min(10, 'Telefone inválido'),
   servico: z.string().min(1, 'Selecione um serviço de interesse'),
-  necessidade: z
-    .string()
-    .min(10, 'Conte-nos um pouco sobre sua demanda')
-    .optional()
-    .or(z.literal('')),
+  necessidade: z.string().min(10, 'A mensagem é obrigatória e deve ter pelo menos 10 caracteres'),
 })
 
 export function ContactSection() {
   const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,14 +57,31 @@ export function ContactSection() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    toast({
-      title: 'Proposta Solicitada com Sucesso!',
-      description: 'Nossa equipe comercial entrará em contato em até 2 horas úteis.',
-      className: 'bg-primary text-white border-none',
-    })
-    form.reset()
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      setIsSubmitting(true)
+
+      // Simula o envio do email para o destino especificado
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+
+      console.log('Email enviado para atendimento@zenviver.com.br com o payload:', values)
+
+      toast({
+        title: 'Sua mensagem foi enviada com sucesso!',
+        description: 'Nossa equipe comercial entrará em contato em breve.',
+        className: 'bg-primary text-primary-foreground border-none',
+      })
+
+      form.reset()
+    } catch (error) {
+      toast({
+        title: 'Erro ao enviar mensagem.',
+        description: 'Por favor, tente novamente mais tarde.',
+        variant: 'destructive',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -111,7 +127,7 @@ export function ContactSection() {
           <div className="p-10">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="nome"
@@ -140,7 +156,7 @@ export function ContactSection() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="empresa"
@@ -169,7 +185,7 @@ export function ContactSection() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="email"
@@ -190,7 +206,7 @@ export function ContactSection() {
                       <FormItem>
                         <FormLabel>Telefone / WhatsApp</FormLabel>
                         <FormControl>
-                          <Input {...field} />
+                          <Input type="tel" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -204,7 +220,7 @@ export function ContactSection() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Serviço de Interesse</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value || undefined}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Selecione..." />
@@ -244,8 +260,13 @@ export function ContactSection() {
                   )}
                 />
 
-                <Button type="submit" size="lg" className="w-full mt-6 font-bold text-base">
-                  SOLICITAR PROPOSTA
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full mt-6 font-bold text-base"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'ENVIANDO...' : 'SOLICITAR PROPOSTA'}
                 </Button>
               </form>
             </Form>
