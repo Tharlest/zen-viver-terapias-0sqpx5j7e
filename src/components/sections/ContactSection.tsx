@@ -74,8 +74,7 @@ export function ContactSection() {
       await pb.collection('contact_messages').create(payload)
 
       toast({
-        title: 'Sua mensagem foi enviada com sucesso!',
-        description: 'Nossa equipe comercial entrará em contato em breve.',
+        title: 'Formulário enviado com sucesso! Entraremos em contato em breve.',
         className: 'bg-primary text-primary-foreground border-none',
       })
 
@@ -246,7 +245,7 @@ export function ContactSection() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Serviço de Interesse</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value || undefined}>
+                      <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Selecione..." />
