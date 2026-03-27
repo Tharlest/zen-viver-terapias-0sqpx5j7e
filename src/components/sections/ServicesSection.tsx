@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Dialog,
@@ -6,73 +7,25 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import iconeSipat from '@/assets/icone-sipat-2012e.png'
-import iconeBreathwork from '@/assets/icone-breathwork-3d370.png'
-import iconeQuickMassage from '@/assets/icone-quick-massage-08173.png'
-
-const services = [
-  {
-    title: 'Shiatsu Corporativo',
-    description:
-      'Técnica de massagem terapêutica japonesa aplicada sobre a roupa, focada em pontos de tensão para alívio rápido de dores musculares no ambiente de trabalho.',
-    fullDescription:
-      'O Shiatsu Corporativo é uma intervenção rápida que atua diretamente nos pontos de tensão gerados pelo trabalho em escritório. Utilizando a pressão dos dedos, palmas das mãos e alongamentos, o terapeuta consegue liberar o fluxo de energia do corpo, proporcionando alívio imediato do estresse, melhora na postura e aumento da concentração. Cada sessão dura em média de 15 a 20 minutos, sendo perfeitamente adaptável à dinâmica corporativa.',
-    benefits: [
-      'Alívio de dores musculares e articulares',
-      'Redução drástica do estresse e ansiedade',
-      'Melhora significativa da postura',
-      'Aumento imediato da produtividade e foco',
-    ],
-    icon: iconeQuickMassage,
-  },
-  {
-    title: 'Terapia Auricular',
-    description:
-      'Estimulação de pontos específicos na orelha para promover o bem-estar físico e mental, reduzindo o estresse, ansiedade e tensões do dia a dia corporativo.',
-    fullDescription:
-      'A Auriculoterapia, ou Terapia Auricular, é uma técnica derivada da acupuntura que utiliza pequenas sementes ou esferas para estimular pontos específicos no pavilhão auricular. Como a orelha é um microssistema que representa todo o corpo humano, a estimulação desses pontos ajuda a reequilibrar o organismo, tratando queixas físicas e emocionais muito comuns no ambiente corporativo, como insônia, enxaqueca e tensões nervosas.',
-    benefits: [
-      'Tratamento eficaz de enxaquecas e cefaleias',
-      'Melhora perceptível na qualidade do sono',
-      'Reequilíbrio emocional e redução da irritabilidade',
-      'Procedimento extremamente rápido e indolor',
-    ],
-    icon: 'https://img.usecurling.com/i?q=ear&shape=outline&color=green',
-  },
-  {
-    title: 'Breathwork Corporativo',
-    description:
-      'Vivências de respiração consciente projetadas para regular o sistema nervoso, melhorar o foco, reduzir a ansiedade e aumentar a produtividade das equipes.',
-    fullDescription:
-      'O Breathwork Corporativo é uma prática guiada de respiração consciente que ajuda os colaboradores a acessarem estados de relaxamento profundo e clareza mental em apenas alguns minutos. Através de técnicas respiratórias específicas, é possível regular o sistema nervoso autônomo, diminuindo a produção de cortisol (o hormônio do estresse) e aumentando a oxigenação cerebral, o que resulta em melhores tomadas de decisão e maior resiliência emocional para a equipe.',
-    benefits: [
-      'Redução rápida e efetiva da ansiedade',
-      'Aumento duradouro da clareza mental',
-      'Melhora na oxigenação do cérebro',
-      'Equilíbrio e regulação do sistema nervoso',
-    ],
-    icon: iconeBreathwork,
-  },
-  {
-    title: 'SIPAT & Eventos Corporativos',
-    description:
-      'Participação ativa em semanas de prevenção de acidentes e eventos empresariais, com palestras e práticas de saúde preventiva engajadoras e transformadoras.',
-    fullDescription:
-      'Nossa participação na SIPAT (Semana Interna de Prevenção de Acidentes de Trabalho) e em outros eventos corporativos vai muito além das palestras tradicionais monótonas. Levamos vivências práticas e interativas que realmente engajam os colaboradores com a sua própria saúde. Combinamos informações essenciais sobre ergonomia, saúde mental e qualidade de vida com demonstrações práticas das nossas terapias, criando um evento verdadeiramente memorável que atende perfeitamente às novas exigências da NR-1.',
-    benefits: [
-      'Adequação total às normas atualizadas da NR-1',
-      'Engajamento real e ativo dos colaboradores',
-      'Ações práticas, dinâmicas e vivenciais',
-      'Conscientização profunda sobre saúde preventiva',
-    ],
-    icon: iconeSipat,
-  },
-]
+import { services } from '@/lib/data'
 
 export function ServicesSection() {
+  const [openServiceId, setOpenServiceId] = useState<string | null>(null)
+
+  const handleRequestBudget = () => {
+    setOpenServiceId(null)
+    // Delay scrolling slightly to allow the Radix UI Dialog to completely unmount
+    // and remove the body scroll lock (pointer-events & overflow: hidden)
+    setTimeout(() => {
+      const contactEl = document.getElementById('contato')
+      if (contactEl) {
+        contactEl.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 300)
+  }
+
   return (
     <section className="py-24 bg-slate-50 relative">
       {/* Anchor targets to ensure menu smooth scroll works regardless of exact link reference */}
@@ -96,7 +49,11 @@ export function ServicesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <Dialog key={index}>
+            <Dialog
+              key={service.id}
+              open={openServiceId === service.id}
+              onOpenChange={(isOpen) => setOpenServiceId(isOpen ? service.id : null)}
+            >
               <DialogTrigger asChild>
                 <Card
                   className="cursor-pointer border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#2D9B5C] transition-all duration-300 group flex flex-col h-full bg-white animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2D9B5C] focus-visible:ring-offset-2"
@@ -107,7 +64,7 @@ export function ServicesSection() {
                   <CardHeader className="text-center pb-4 grow-0">
                     <div className="mx-auto w-24 h-24 mb-6 flex items-center justify-center bg-slate-50 rounded-full shadow-inner group-hover:scale-110 group-hover:bg-[#2D9B5C]/5 transition-all duration-500 border border-slate-100 p-5">
                       <img
-                        src={service.icon}
+                        src={service.imgIcon}
                         alt={`Ícone ${service.title}`}
                         className="w-full h-full object-contain filter transition-all duration-300 group-hover:opacity-90"
                       />
@@ -132,7 +89,7 @@ export function ServicesSection() {
                 <DialogHeader className="space-y-4">
                   <div className="mx-auto w-20 h-20 flex items-center justify-center bg-slate-50 rounded-full shadow-inner border border-slate-100 p-4">
                     <img
-                      src={service.icon}
+                      src={service.imgIcon}
                       alt={`Ícone ${service.title}`}
                       className="w-full h-full object-contain"
                     />
@@ -169,19 +126,13 @@ export function ServicesSection() {
                   </div>
                 </div>
                 <div className="mt-2 flex justify-center pt-6 border-t border-slate-100">
-                  <DialogClose asChild>
-                    <Button
-                      size="lg"
-                      className="w-full sm:w-auto bg-[#2D9B5C] hover:bg-[#2D9B5C]/90 text-white font-bold tracking-wide shadow-md h-12 px-8"
-                      onClick={() => {
-                        setTimeout(() => {
-                          document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })
-                        }, 150)
-                      }}
-                    >
-                      SOLICITAR ORÇAMENTO
-                    </Button>
-                  </DialogClose>
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto bg-[#2D9B5C] hover:bg-[#2D9B5C]/90 text-white font-bold tracking-wide shadow-md h-12 px-8"
+                    onClick={handleRequestBudget}
+                  >
+                    SOLICITAR ORÇAMENTO
+                  </Button>
                 </div>
               </DialogContent>
             </Dialog>

@@ -22,6 +22,8 @@ import {
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
 import { services } from '@/lib/data'
+import pb from '@/lib/pocketbase/client'
+import { extractFieldErrors } from '@/lib/pocketbase/errors'
 
 const formSchema = z.object({
   nome: z.string().min(2, 'Nome é obrigatório'),
@@ -61,10 +63,15 @@ export function ContactSection() {
     try {
       setIsSubmitting(true)
 
-      // Simula o envio do email para o destino especificado
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      const payload = {
+        name: values.nome,
+        email: values.email,
+        phone: values.telefone,
+        service: values.servico,
+        message: `Cargo: ${values.cargo}\nEmpresa: ${values.empresa}\nColaboradores: ${values.colaboradores}\nNecessidade: ${values.necessidade}`,
+      }
 
-      console.log('Email enviado para atendimento@zenviver.com.br com o payload:', values)
+      await pb.collection('contact_messages').create(payload)
 
       toast({
         title: 'Sua mensagem foi enviada com sucesso!',
@@ -74,11 +81,30 @@ export function ContactSection() {
 
       form.reset()
     } catch (error) {
-      toast({
-        title: 'Erro ao enviar mensagem.',
-        description: 'Por favor, tente novamente mais tarde.',
-        variant: 'destructive',
-      })
+      const fieldErrors = extractFieldErrors(error)
+
+      if (Object.keys(fieldErrors).length > 0) {
+        Object.entries(fieldErrors).forEach(([field, msg]) => {
+          let formField = field as any
+          if (field === 'name') formField = 'nome'
+          if (field === 'phone') formField = 'telefone'
+          if (field === 'service') formField = 'servico'
+          if (field === 'message') formField = 'necessidade'
+
+          form.setError(formField, { message: msg })
+        })
+        toast({
+          title: 'Erro de validação.',
+          description: 'Verifique os campos destacados e tente novamente.',
+          variant: 'destructive',
+        })
+      } else {
+        toast({
+          title: 'Erro ao enviar mensagem.',
+          description: 'Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.',
+          variant: 'destructive',
+        })
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -228,11 +254,11 @@ export function ContactSection() {
                         </FormControl>
                         <SelectContent>
                           {services.map((s) => (
-                            <SelectItem key={s.id} value={s.id}>
+                            <SelectItem key={s.id} value={s.title}>
                               {s.title}
                             </SelectItem>
                           ))}
-                          <SelectItem value="outro">
+                          <SelectItem value="Outro / Não sei ainda">
                             Consultoria Completa / Não sei ainda
                           </SelectItem>
                         </SelectContent>

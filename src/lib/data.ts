@@ -1,38 +1,71 @@
+import iconeSipat from '@/assets/icone-sipat-2012e.png'
+import iconeBreathwork from '@/assets/icone-breathwork-3d370.png'
+import iconeQuickMassage from '@/assets/icone-quick-massage-08173.png'
+
 export const services = [
   {
     id: 'shiatsu',
     title: 'Shiatsu Corporativo',
     description:
-      'Reduz em até 62% as tensões cervicais e lombares, prevenindo DORT/LER no ambiente de trabalho.',
+      'Técnica de massagem terapêutica japonesa aplicada sobre a roupa, focada em pontos de tensão para alívio rápido de dores musculares no ambiente de trabalho.',
+    fullDescription:
+      'O Shiatsu Corporativo é uma intervenção rápida que atua diretamente nos pontos de tensão gerados pelo trabalho em escritório. Utilizando a pressão dos dedos, palmas das mãos e alongamentos, o terapeuta consegue liberar o fluxo de energia do corpo, proporcionando alívio imediato do estresse, melhora na postura e aumento da concentração. Cada sessão dura em média de 15 a 20 minutos, sendo perfeitamente adaptável à dinâmica corporativa.',
+    benefits: [
+      'Alívio de dores musculares e articulares',
+      'Redução drástica do estresse e ansiedade',
+      'Melhora significativa da postura',
+      'Aumento imediato da produtividade e foco',
+    ],
     icon: 'Hands',
+    imgIcon: iconeQuickMassage,
   },
   {
-    id: 'quick-massage',
-    title: 'Quick Massage',
+    id: 'auriculoterapia',
+    title: 'Terapia Auricular',
     description:
-      'Sessões curtas de 15 minutos focadas em devolver energia imediata e clareza mental aos colaboradores.',
+      'Estimulação de pontos específicos na orelha para promover o bem-estar físico e mental, reduzindo o estresse e ansiedade.',
+    fullDescription:
+      'A Auriculoterapia, ou Terapia Auricular, é uma técnica derivada da acupuntura que utiliza pequenas sementes ou esferas para estimular pontos específicos no pavilhão auricular. Como a orelha é um microssistema que representa todo o corpo humano, a estimulação desses pontos ajuda a reequilibrar o organismo, tratando queixas físicas e emocionais muito comuns no ambiente corporativo, como insônia, enxaqueca e tensões nervosas.',
+    benefits: [
+      'Tratamento eficaz de enxaquecas e cefaleias',
+      'Melhora perceptível na qualidade do sono',
+      'Reequilíbrio emocional e redução da irritabilidade',
+      'Procedimento extremamente rápido e indolor',
+    ],
     icon: 'Activity',
-  },
-  {
-    id: 'reflexologia',
-    title: 'Reflexologia Executiva',
-    description:
-      'Aumenta em 73% a qualidade do sono e fortalece o sistema imunológico através de estímulos podais.',
-    icon: 'Footprints',
+    imgIcon: 'https://img.usecurling.com/i?q=ear&shape=outline&color=green',
   },
   {
     id: 'breathwork',
     title: 'Breathwork Corporativo',
     description:
-      'Práticas guiadas de respiração que reduzem o cortisol em 25%, ideais para momentos de alta pressão.',
+      'Vivências de respiração consciente projetadas para regular o sistema nervoso, melhorar o foco e reduzir a ansiedade.',
+    fullDescription:
+      'O Breathwork Corporativo é uma prática guiada de respiração consciente que ajuda os colaboradores a acessarem estados de relaxamento profundo e clareza mental em apenas alguns minutos. Através de técnicas respiratórias específicas, é possível regular o sistema nervoso autônomo, diminuindo a produção de cortisol (o hormônio do estresse) e aumentando a oxigenação cerebral, o que resulta em melhores tomadas de decisão e maior resiliência emocional para a equipe.',
+    benefits: [
+      'Redução rápida e efetiva da ansiedade',
+      'Aumento duradouro da clareza mental',
+      'Melhora na oxigenação do cérebro',
+      'Equilíbrio e regulação do sistema nervoso',
+    ],
     icon: 'Wind',
+    imgIcon: iconeBreathwork,
   },
   {
     id: 'sipat',
-    title: 'SIPAT & Eventos',
+    title: 'SIPAT & Eventos Corporativos',
     description:
-      'Ações dinâmicas e engajadoras para garantir conformidade com a NR-1/2025 e promover saúde real.',
+      'Participação ativa em semanas de prevenção de acidentes e eventos empresariais com práticas engajadoras.',
+    fullDescription:
+      'Nossa participação na SIPAT (Semana Interna de Prevenção de Acidentes de Trabalho) e em outros eventos corporativos vai muito além das palestras tradicionais monótonas. Levamos vivências práticas e interativas que realmente engajam os colaboradores com a sua própria saúde. Combinamos informações essenciais sobre ergonomia, saúde mental e qualidade de vida com demonstrações práticas das nossas terapias, criando um evento verdadeiramente memorável que atende perfeitamente às novas exigências da NR-1.',
+    benefits: [
+      'Adequação total às normas atualizadas da NR-1',
+      'Engajamento real e ativo dos colaboradores',
+      'Ações práticas, dinâmicas e vivenciais',
+      'Conscientização profunda sobre saúde preventiva',
+    ],
     icon: 'CalendarHeart',
+    imgIcon: iconeSipat,
   },
 ]
 
